@@ -13,7 +13,7 @@ class DataFrameInfo():
 #######################################################################################################################
 #
 #######################################################################################################################
-class MultiDataFrameImport():
+class FilesParser():
 
     def __init__(self, root_directory):
         self._root_dir = root_directory
@@ -48,7 +48,10 @@ class MultiDataFrameImport():
 
         return files
 
-
+    @staticmethod
+    def list_excel_sheets(excel_file):
+        xl = pd.ExcelFile(excel_file)
+        return xl.sheet_names
 
 #######################################################################################################################
 #
@@ -57,12 +60,9 @@ class ExcelFileReader(object):
 
     def __init__(self, excel_file_path):
         self.__xl_file__ = excel_file_path
-        self._buffer =
 
-    @staticmethod
-    def list_excel_sheets(excel_file):
-        xl = pd.ExcelFile(excel_file)
-        return xl.sheet_names
+
+
 
     @staticmethod
     def list_excel_sheets_per_file(excel_files):
@@ -75,6 +75,7 @@ class ExcelFileReader(object):
                 print('Error at file: ', xlf)
                 print(ex)
         return xl_sheets
+
 
     def read_files(self, files, include_sheet_regexp =  None, exclude_sheet_regexp = None, file_sheet_sep="$$"):
 
