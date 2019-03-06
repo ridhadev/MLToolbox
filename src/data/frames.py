@@ -7,7 +7,7 @@ from utils.text import *
 from collections import OrderedDict, Counter
 
 
-########################################### Explore    #################################################################
+########################################### Explore  ###################################################################
 
 #####################
 ##      Common     ##
@@ -97,7 +97,7 @@ def get_columns_desc(frame, index_by_dtype=False, sort_by='%fill', ascending_sor
 
     return col_desc_df
 
-
+########################################################################################################################
 #
 # Outputs two dict oàr dataframes:
 # One listing the count of non numeric values per column (values as index in dataframe; better when there are a lot of non-numeric values)
@@ -147,10 +147,7 @@ def get_non_numeric_values(frame, columns=[], output_as_dataframe=True):
 
     return nonnumeric_values_dict, reverse_dict
 
-
-###############################
-#
-###################################
+########################################################################################################################
 def get_misfilled_columns(frame, desc_frame, threshold_col = "%filled", threshold = 0.75, dtypes=[]) :
     if dtypes:
         return list(desc_frame[desc_frame[threshold_col] < threshold].index).select_dtypes(include=dtypes)
@@ -176,7 +173,7 @@ def is_boolean_serie(aserie,
 
     return False
 
-
+########################################################################################################################
 def get_boolean_candidates(frame, desc_frame, threshold_col = "%count_num", threshold = 0.75, only_obj_columns=True) :
 
     candidates = list(desc_frame[desc_frame['unique'] == 2].index)
@@ -308,7 +305,6 @@ def convert_to_boolean(frame, columns=[],
     return frame
 
 ## Transform
-
 def preprocess_columns_per_dtype(
         frame,
         mapper,
@@ -326,8 +322,7 @@ def preprocess_columns_per_dtype(
 
     return frame
 
-
-
+##
 def normalize_text_columns(text):
     if pd.isnull(text):
         return text

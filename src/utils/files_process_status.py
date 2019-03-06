@@ -3,7 +3,9 @@ import datetime
 import os
 from files.metadata import get_file_size, get_file_date
 
-
+########################################################################################################################
+#
+#
 def list_files_indir(dir, files_only=True, dir_only=False, absolute_path=False):
     results = []
 
@@ -23,7 +25,13 @@ def list_files_indir(dir, files_only=True, dir_only=False, absolute_path=False):
 
     return add_absolute_path_if_needed( list(os.listdir(dir)) )
 
+########################################################################################################################
+#
+#
 class FilesProcessStatus:
+    '''
+
+    '''
     def __init__(self, input2output_files):
         self.files_frame = pd.DataFrame.from_dict(input2output_files, orient='index')
         self.files_frame.columns = ['Ouput']
@@ -43,7 +51,11 @@ class FilesProcessStatus:
 
 
     def get_parsing_status(self, row):
+        '''
 
+        :param row:
+        :return:
+        '''
         if pd.isnull(row.OUTPUT_EDIT_DATE):
             return "MISSING"
 
@@ -55,7 +67,7 @@ class FilesProcessStatus:
 
     def compute_file_status(files_frame=None):
         '''
-            Get the parsing status: "MISIING" if the file was not parsed yet, "UP_TO_DATE" if the edition time of output file is later than the input one;  "OUT_OF_DATE" otherwise
+            Get the parsing status: "MISSING" if the file was not parsed yet, "UP_TO_DATE" if the edition time of output file is later than the input one;  "OUT_OF_DATE" otherwise
             :param row:
             :return:
         '''
@@ -74,13 +86,17 @@ class FilesProcessStatus:
     def get_missing_input_files(self, output_dir):
         '''
         List files in the output directory and not listed as output file in the initial dataframe.
-        Either the file is not a parsing result one; or it is one that was done in the past and th eoriginal parsed file is missing or renamed.
+        Either the file is not supposed to be an output one; or it is one that was done in the past and the original parsed file is missing or renamed.
         :param output_dir:
         :return:
         '''
         files = list_files_indir(output_dir, absolute_path=True)
         return set(files) - set(self.files_frame.Ouput.values)
 
+########################################################################################################################
+#
+#
+#
 if __name__ == '__main__':
     df = pd.read_csv("W:\\Group\\Data-Unix\\pau955\\WORK_DIR\\Ridha\\DEV\\PycharmProjects\\MLToolbox\\data\\TestFiles\\files_status_compare.csv", sep=',')
 
