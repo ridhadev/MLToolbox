@@ -19,6 +19,7 @@ def get_file_size(afile, divide=1000):
 # Gets the file creation/edition mode date
 # Windows support all plateforms, other plateform support only 'create' mode
 # mode support 'create', 'access' and 'edit'
+
 def get_file_date(path_to_file, mode='edit'):
     """Try to get the date that a file was created, falling back to when it was
     last modified if that isn't possible.

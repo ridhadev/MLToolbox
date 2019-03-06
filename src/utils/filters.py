@@ -1,6 +1,19 @@
 import re
 
 
+
+########################################################################################################################
+
+def filter_list(items, filter):
+    '''
+    Filter a list of items according to a filter
+    :param items: Items to filter
+    :param filter: Filter to use. Must have a accept() method.
+    :return: Filtered list of items
+    '''
+    return [f for f in items if filter.accept(f)]
+
+
 ########################################################################################################################
 
 class SimpleTextFilter():
@@ -41,7 +54,7 @@ class SimpleTextFilter():
 
     def filter_dict_values(self, dict_data):
         '''
-        Filter dictionnary values
+        Filter dictionary values
         :param dict_data:
         :param onkeys:
         :param onvalues:
@@ -56,7 +69,7 @@ class SimpleTextFilter():
         return data_copy
 
 
-#######################################################################################################################
+########################################################################################################################
 
 class RegexTextFilter(SimpleTextFilter) :
 
@@ -83,3 +96,5 @@ class RegexTextFilter(SimpleTextFilter) :
             return False
 
         return True
+
+########################################################################################################################
